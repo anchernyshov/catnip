@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\LoginController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('app');
+})->middleware('simple');
+
+Route::controller(LoginController::class)->group(function() {
+    Route::get('/login', 'login')->name('login');
+    Route::get('/logout', 'logout')->name('logout');
 });
