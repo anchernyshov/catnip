@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LoginController;
-
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +19,8 @@ use App\Http\Controllers\LoginController;
 Route::get('/', function () {
     return view('app');
 })->middleware('simple');
+
+Route::get('/users', [UserController::class, 'index']);
 
 Route::controller(LoginController::class)->group(function() {
     Route::get('/login', 'login')->name('login');

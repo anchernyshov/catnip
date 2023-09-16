@@ -54,7 +54,7 @@ class User extends Authenticatable
     public function checkPermission($permission_name) 
     {
         foreach ($this->permissions as $k => $v) {
-            if ($v->name == $permission_name) return true;
+            if ($v->permission_name == $permission_name) return true;
         }
         return false;
     }
