@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     protected $table = 'user';
+    protected $appends = ['permissions'];
 
     /**
      * The attributes that are mass assignable.
@@ -39,4 +40,22 @@ class User extends Authenticatable
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public function getPermissionsAttribute() 
+    {
+        return \DB::select('CALL get_user_permissions(?)', [$this->name]);
+    }
+
+    public function checkPermission($name) 
+    {
+        foreach ($this->permissions as $k => $v) {
+            if ($v->name == $name) return true;
+        }
+        return false;
+    }
 }
