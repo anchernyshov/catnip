@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\Controller as BaseController;
 
-class LoginController extends Controller
+class LoginController extends BaseController
 {
-    
     /**
      * Display a login form.
      *
