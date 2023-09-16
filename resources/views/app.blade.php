@@ -5,6 +5,9 @@
     @livewireStyles
 </head>
 <body>
+    @if (Auth::check())
+        @include('header')
+    @endif
     @yield('content')
     @livewireScripts
 </body>

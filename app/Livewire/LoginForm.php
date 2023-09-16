@@ -22,7 +22,7 @@ class LoginForm extends Component
     {
         $this->validate();
 
-        $user = \App\Models\User::where('name', '=', strtolower($this->login))->first();
+        $user = \App\Models\User::with('role')->where('name', '=', strtolower($this->login))->first();
 
         if (!$user) {
             $this->addError('result', 'User not found!');
