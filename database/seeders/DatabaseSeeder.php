@@ -32,6 +32,11 @@ class DatabaseSeeder extends Seeder
             'description' => 'Guest role'
         ]);
 
+        DB::table('role')->insert([
+            'name' => 'Manager',
+            'description' => 'Manager role'
+        ]);
+
         // Default permissions
         DB::table('permission')->insert([
             'name' => 'user.read',
@@ -63,6 +68,11 @@ class DatabaseSeeder extends Seeder
             'permission_id' => 3
         ]);
 
+        DB::table('role_to_permission')->insert([
+            'role_id' => 3,
+            'permission_id' => 1
+        ]);
+
         // Default users
         DB::table('user')->insert([
             'name' => 'admin',
@@ -76,6 +86,13 @@ class DatabaseSeeder extends Seeder
             'display_name' => 'guest',
             'password' => Hash::make('guest'),
             'role_id' => 2
+        ]);
+
+        DB::table('user')->insert([
+            'name' => 'manager',
+            'display_name' => 'manager',
+            'password' => Hash::make('manager'),
+            'role_id' => 3
         ]);
     }
 }
