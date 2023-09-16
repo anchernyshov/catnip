@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginForm extends Component
 {
-
     public $login;
     public $password;
 

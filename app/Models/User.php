@@ -51,10 +51,10 @@ class User extends Authenticatable
         return \DB::select('CALL get_user_permissions(?)', [$this->name]);
     }
 
-    public function checkPermission($name) 
+    public function checkPermission($permission_name) 
     {
         foreach ($this->permissions as $k => $v) {
-            if ($v->name == $name) return true;
+            if ($v->name == $permission_name) return true;
         }
         return false;
     }

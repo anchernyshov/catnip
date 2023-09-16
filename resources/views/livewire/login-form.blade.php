@@ -7,7 +7,7 @@
         </div>
         <div>
             <label for="password">Password</label>
-            <input type="text" id="password" placeholder="Password" wire:model="password">
+            <input type="password" id="password" placeholder="Password" wire:model="password">
             @error('password') <span>{{ $message }}</span> @enderror
         </div>
         <button type="submit">Login</button>
