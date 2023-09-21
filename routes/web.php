@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -16,10 +17,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('app');
-})->middleware('simple');
-
+Route::get('/', [DashboardController::class, 'index']);
 Route::get('/users', [UserController::class, 'index']);
 
 Route::controller(LoginController::class)->group(function() {
