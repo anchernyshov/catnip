@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Default permissions
+        // User
         DB::table('permission')->insert([
             'name' => 'user.read',
             'description' => 'Read user data'
@@ -50,9 +51,26 @@ class DatabaseSeeder extends Seeder
 
         DB::table('permission')->insert([
             'name' => 'user.delete',
-            'description' => 'Delete user data'
+            'description' => 'Delete users'
         ]);
 
+        // Role
+        DB::table('permission')->insert([
+            'name' => 'role.read',
+            'description' => 'Read role data'
+        ]);
+
+        DB::table('permission')->insert([
+            'name' => 'role.modify',
+            'description' => 'Modify role data'
+        ]);
+
+        DB::table('permission')->insert([
+            'name' => 'role.delete',
+            'description' => 'Delete roles'
+        ]);
+
+        // Link roles to permissions
         DB::table('role_to_permission')->insert([
             'role_id' => 1,
             'permission_id' => 1
@@ -66,6 +84,21 @@ class DatabaseSeeder extends Seeder
         DB::table('role_to_permission')->insert([
             'role_id' => 1,
             'permission_id' => 3
+        ]);
+        
+        DB::table('role_to_permission')->insert([
+            'role_id' => 1,
+            'permission_id' => 4
+        ]);
+
+        DB::table('role_to_permission')->insert([
+            'role_id' => 1,
+            'permission_id' => 5
+        ]);
+
+        DB::table('role_to_permission')->insert([
+            'role_id' => 1,
+            'permission_id' => 6
         ]);
 
         DB::table('role_to_permission')->insert([

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/users', [UserController::class, 'index']);
+Route::get('/roles', [RoleController::class, 'index']);
 
 Route::controller(LoginController::class)->group(function() {
     Route::get('/login', 'login')->name('login');
