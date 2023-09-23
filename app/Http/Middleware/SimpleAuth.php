@@ -18,11 +18,25 @@ class SimpleAuth
 
     public function handle($request, Closure $next)
     {
+        $permission = null;
+        $controller_class_name = \Route::getRoutes()->match($request)->action['controller'];
+        
+        if (class_exists($controller_class_name)) {
+            $permission = $controller_class_name::$required_permission ?? null;
+        }
+
         if ( Auth::check() ) {
-            $request->attributes->set('user', Auth::user()->name);
-            return $next($request);
+            if ($permission === null) {
+                return $next($request);
+            } else {
+                if (Auth::user()->checkPermission($permission)) {
+                    return $next($request);
+                } else {
+                    abort(403);
+                }
+            }
         } else {
             return redirect()->route('login');
-        }
+        } 
     }
 }

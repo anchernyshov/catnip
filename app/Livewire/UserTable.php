@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UserTable extends Component
 {
+    public static $required_permission = 'user.read';
+
     public $users;
     public $roles;
     public $selected_user_id = null;

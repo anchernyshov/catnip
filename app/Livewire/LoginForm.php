@@ -17,6 +17,12 @@ class LoginForm extends Component
         'password' => 'required'
     ];
 
+    public function mount() {
+        if (Auth::check()) {
+            return redirect()->to('/');
+        }
+    }
+
     public function submit()
     {
         $this->validate();
@@ -32,11 +38,18 @@ class LoginForm extends Component
 
         if ($password_valid) {
             Auth::login( $user );
-            return \Redirect::to('/');
+            return redirect()->to('/');
         } else {
             $this->addError('result', 'Invalid password!');
         }
     }
+
+    public function logout() {
+        Auth::logout();
+        session()->invalidate();
+        session()->regenerateToken();
+        return redirect()->to('login');
+    } 
 
     public function render()
     {

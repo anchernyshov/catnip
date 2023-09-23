@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class RoleTable extends Component
 {
+    public static $required_permission = 'role.read';
+
     public $roles;
     public $selected_role_id = null;
     public $form_visible = false;
