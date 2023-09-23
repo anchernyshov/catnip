@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\RoleController;
+use App\Livewire\Dashboard;
+use App\Livewire\LoginForm;
+use App\Livewire\UserTable;
+use App\Livewire\RoleTable;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +18,11 @@ use App\Http\Controllers\RoleController;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index']);
-Route::get('/users', [UserController::class, 'index']);
-Route::get('/roles', [RoleController::class, 'index']);
+Route::get('/login', LoginForm::class)->name('login');
+Route::get('/logout', [ LoginForm::class, 'logout' ])->name('logout');
 
-Route::controller(LoginController::class)->group(function() {
-    Route::get('/login', 'login')->name('login');
-    Route::get('/logout', 'logout')->name('logout');
+Route::middleware('simple')->group(function() {
+    Route::get('/', Dashboard::class);
+    Route::get('/users', UserTable::class);
+    Route::get('/roles', RoleTable::class);
 });
