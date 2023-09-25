@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Livewire\Dashboard;
 use App\Livewire\LoginForm;
-use App\Livewire\UserTable;
-use App\Livewire\RoleTable;
+use App\Livewire\UserDataTable;
+use App\Livewire\RoleDataTable;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +23,6 @@ Route::get('/logout', [ LoginForm::class, 'logout' ])->name('logout');
 
 Route::middleware('simple')->group(function() {
     Route::get('/', Dashboard::class);
-    Route::get('/users', UserTable::class);
-    Route::get('/roles', RoleTable::class);
+    Route::get('/users', UserDataTable::class);
+    Route::get('/roles', RoleDataTable::class);
 });
