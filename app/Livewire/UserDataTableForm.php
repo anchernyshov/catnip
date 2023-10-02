@@ -15,11 +15,11 @@ class UserDataTableForm extends DataTableForm
     public $roles = [];
     
     public $fields = [
-        'name' => '',
-        'display_name' => '',
-        'password' => '',
-        'new_password' => '',
-        'role_id' => ''
+        'name' => null,
+        'display_name' => null,
+        'password' => null,
+        'new_password' => null,
+        'role_id' => 2
     ];
 
     public function mount() {

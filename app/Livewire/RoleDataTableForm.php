@@ -11,7 +11,7 @@ class RoleDataTableForm extends DataTableForm
     protected $model = \App\Models\Role::class;
     
     public $fields = [
-        'name' => '',
-        'description' => ''
+        'name' => null,
+        'description' => null
     ];
 }

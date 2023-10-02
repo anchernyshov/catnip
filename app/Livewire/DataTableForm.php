@@ -13,6 +13,7 @@ class DataTableForm extends Component
     protected $modify_permission = null;
     protected $view_name = '';
     protected $model = null;
+    protected $default_field_values = [];
     
     public $fields = [];
     public $visible = false;
@@ -22,6 +23,10 @@ class DataTableForm extends Component
         'modify' => 'loadFields',
         'create' => 'create',
     ];
+
+    public function __construct() {
+        $this->default_field_values = $this->fields;
+    }
     
     public function loadFields($id) {
         if (Auth::user()->checkPermission($this->modify_permission)) {
@@ -44,6 +49,7 @@ class DataTableForm extends Component
     public function create() {
         $this->visible = true;
         $this->selected_id = null;
+        $this->resetFields();
     }
 
     public function update() {
@@ -54,9 +60,9 @@ class DataTableForm extends Component
                 } else {
                     $obj = new $this->model();
                 }
-                $attrs = $obj->getAttributes();
+                $attrs = \Schema::getColumnListing((new $this->model)->getTable());
                 foreach ($this->fields as $key => $value) {
-                    if (array_key_exists($key, $attrs)) {
+                    if (in_array($key, $attrs)) {
                         $obj->$key = $this->fields[$key];
                     }
                 }
@@ -77,9 +83,7 @@ class DataTableForm extends Component
     }
 
     public function resetFields() {
-        foreach ($this->fields as $key => $value) {
-            $this->fields[$key] = '';
-        }
+        $this->fields = $this->default_field_values;
     }
 
     public function render() {
