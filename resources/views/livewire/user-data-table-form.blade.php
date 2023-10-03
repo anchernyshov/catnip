@@ -12,5 +12,10 @@
             <button wire:click="update">Save</button>
             <button wire:click="cancel">Cancel</button>
         </div>
+        <div>
+            @error('fields.name') <span>{{ $message }}</span> @enderror
+            @error('fields.display_name') <span>{{ $message }}</span> @enderror
+            @error('fields.role_id') <span>{{ $message }}</span> @enderror
+        </div>
     @endif
 </div>

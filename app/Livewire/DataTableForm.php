@@ -16,6 +16,7 @@ class DataTableForm extends Component
     protected $default_field_values = [];
     
     public $fields = [];
+    public $rules = [];
     public $visible = false;
     public $selected_id = null;
 
@@ -30,6 +31,7 @@ class DataTableForm extends Component
     
     public function loadFields($id) {
         if (Auth::user()->checkPermission($this->modify_permission)) {
+            $this->resetValidation();
             $this->visible = true;
             try {
                 $obj = $this->model::find($id);
@@ -48,14 +50,16 @@ class DataTableForm extends Component
 
     public function create() {
         if (Auth::user()->checkPermission($this->modify_permission)) {
-        $this->visible = true;
-        $this->selected_id = null;
-        $this->resetFields();
+            $this->visible = true;
+            $this->selected_id = null;
+            $this->resetFields();
+            $this->resetValidation();
         }
     }
 
     public function update() {
         if (Auth::user()->checkPermission($this->modify_permission)) {
+            $this->validate();
             try {
                 if ($this->selected_id) {
                     $obj = $this->model::find($this->selected_id);
@@ -74,6 +78,7 @@ class DataTableForm extends Component
                 abort(500);
             }
             $this->visible = false;
+            $this->resetValidation();
             $this->resetFields();
         }
     }
@@ -81,6 +86,7 @@ class DataTableForm extends Component
     public function cancel() {
         $this->visible = false;
         $this->selected_id = null;
+        $this->resetValidation();
         $this->resetFields();
     }
 
