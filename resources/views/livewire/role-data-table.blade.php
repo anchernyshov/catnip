@@ -1,7 +1,9 @@
 <div>
     <p>
         <div>Roles:</div>
-        <button wire:click="$dispatchTo('role-data-table-form', 'create')">Add</button>
+        @if (Auth::user()->checkPermission('role.modify'))
+            <button wire:click="$dispatchTo('role-data-table-form', 'create')">Add</button>
+        @endif
         <br/>
         <div>
             @foreach ($items as $item)

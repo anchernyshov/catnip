@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class UserDataTable extends DataTable
 {
-    public static $view_permission = 'user.read';
+    const VIEW_PERMISSION = 'user.read';
     
     protected $delete_permission = 'user.delete';
     protected $view_name = 'livewire.user-data-table';

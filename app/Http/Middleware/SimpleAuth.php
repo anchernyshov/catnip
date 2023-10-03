@@ -22,7 +22,10 @@ class SimpleAuth
         $controller_class_name = \Route::getRoutes()->match($request)->action['controller'];
         
         if (class_exists($controller_class_name)) {
-            $permission = $controller_class_name::$view_permission ?? null;
+            $permission = null;
+            if (defined("$controller_class_name::VIEW_PERMISSION")) {
+                $permission = $controller_class_name::VIEW_PERMISSION;
+            }
         }
 
         if ( Auth::check() ) {

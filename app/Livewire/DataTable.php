@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class DataTable extends Component
 {
-    public static $view_permission = null;
+    const VIEW_PERMISSION = '';
 
     protected $delete_permission = null;
     protected $view_name = null;
     protected $model = null;
 
-    public $items = [];
+    protected $items = [];
 
     protected $listeners = [
         'refresh' => 'refresh'
@@ -37,7 +37,7 @@ class DataTable extends Component
     public function render() {
         $this->refresh();
         if ($this->view_name) {
-            return view($this->view_name);
+            return view($this->view_name, ['items' => $this->items]);
         }
     }
 }

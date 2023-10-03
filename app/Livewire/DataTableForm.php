@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DataTableForm extends Component
 {
-    public static $view_permission = null;
+    const VIEW_PERMISSION = '';
 
     protected $modify_permission = null;
     protected $view_name = '';
@@ -47,9 +47,11 @@ class DataTableForm extends Component
     }
 
     public function create() {
+        if (Auth::user()->checkPermission($this->modify_permission)) {
         $this->visible = true;
         $this->selected_id = null;
         $this->resetFields();
+        }
     }
 
     public function update() {

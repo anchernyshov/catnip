@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class RoleDataTable extends DataTable
 {
-    public static $view_permission = 'role.read';
+    const VIEW_PERMISSION = 'role.read';
     
     protected $delete_permission = 'role.delete';
     protected $view_name = 'livewire.role-data-table';

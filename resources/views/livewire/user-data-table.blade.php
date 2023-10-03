@@ -1,7 +1,9 @@
 <div>
     <p>
         <div>Users:</div>
-        <button wire:click="$dispatchTo('user-data-table-form', 'create')">Add</button>
+        @if (Auth::user()->checkPermission('user.modify'))
+            <button wire:click="$dispatchTo('user-data-table-form', 'create')">Add</button>
+        @endif
         <br/>
         <div>
             @foreach ($items as $item)

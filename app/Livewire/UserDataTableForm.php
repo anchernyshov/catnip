@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserDataTableForm extends DataTableForm
 {
-    public static $view_permission = 'user.read';
+    const VIEW_PERMISSION = 'user.read';
 
     protected $modify_permission = 'user.modify';
     protected $view_name = 'livewire.user-data-table-form';
