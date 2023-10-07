@@ -22,14 +22,17 @@ class UserDataTableForm extends DataTableForm
         'role_id' => 2
     ];
 
-    public $rules = [
+    protected $rules = [
         'fields.name' => 'required',
         'fields.display_name' => 'required',
         'fields.role_id' => 'required'
     ];
 
     public function mount() {
-        $this->roles = \App\Models\Role::get();
+        $roles = \App\Models\Role::get();
+        foreach ($roles as $role) {
+            $this->roles[$role->id] = $role->name;
+        }
     }
 
     public function update() {

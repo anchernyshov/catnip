@@ -13,10 +13,11 @@ class DataTableForm extends Component
     protected $modify_permission = null;
     protected $view_name = '';
     protected $model = null;
-    protected $default_field_values = [];
-    
+ 
     public $fields = [];
-    public $rules = [];
+    protected $default_field_values = [];
+    protected $rules = [];
+
     public $visible = false;
     public $selected_id = null;
 

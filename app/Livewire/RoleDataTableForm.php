@@ -15,7 +15,7 @@ class RoleDataTableForm extends DataTableForm
         'description' => null
     ];
 
-    public $rules = [
+    protected $rules = [
         'fields.name' => 'required',
         'fields.description' => 'required'
     ];

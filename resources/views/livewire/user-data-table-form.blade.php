@@ -6,7 +6,7 @@
             <input type="password" wire:model.defer="fields.new_password"/>
             <select wire:model.defer="fields.role_id">
                 @foreach($roles as $key => $value)
-                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                <option value="{{ $key }}">{{ $value }}</option>
                 @endforeach
             </select>
             <button wire:click="update">Save</button>
