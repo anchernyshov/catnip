@@ -52,9 +52,7 @@ class DataTableForm extends Component
     public function create() {
         if (Auth::user()->checkPermission($this->modify_permission)) {
             $this->visible = true;
-            $this->selected_id = null;
-            $this->resetFields();
-            $this->resetValidation();
+            $this->clear();
         }
     }
 
@@ -79,13 +77,16 @@ class DataTableForm extends Component
                 abort(500);
             }
             $this->visible = false;
-            $this->resetValidation();
-            $this->resetFields();
+            $this->clear();
         }
     }
 
     public function cancel() {
         $this->visible = false;
+        $this->clear();
+    }
+
+    public function clear() {
         $this->selected_id = null;
         $this->resetValidation();
         $this->resetFields();
