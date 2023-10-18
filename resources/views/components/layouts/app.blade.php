@@ -8,6 +8,9 @@
     </head>
     <body>
         @if (Auth::check())
+            @if ( !request()->is('/') )
+                <a href='/'>Dashboard</a>
+            @endif
             <span>Hello, {{ Auth::user()->name }} ({{ Auth::user()->role->name }})</span>
             <a href='/logout'>Log out</a>
         @endif
