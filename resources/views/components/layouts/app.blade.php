@@ -3,7 +3,12 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <style>
+            table, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+        </style>
         <title>Catnip</title>
     </head>
     <body>
