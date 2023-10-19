@@ -15,7 +15,7 @@ return new class extends Migration
             $table->smallIncrements('id');
             $table->string('name', 50)->unique();
             $table->string('description', 255)->nullable(true);
-            $table->timestamp('added_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

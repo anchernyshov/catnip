@@ -21,7 +21,7 @@
                         <td>{{ $item->id }} </td>
                         <td>{{ $item->name }} </td>
                         <td>{{ $item->description }}</td>
-                        <td>{{ $item->added_at }}</td>
+                        <td>{{ $item->created_at }}</td>
                         <td>
                             @if (Auth::user()->checkPermission('role.modify'))
                                 <button wire:click="$dispatchTo('role-data-table-form', 'modify', { id: {{ $item->id }}})">Edit</button>

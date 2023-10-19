@@ -20,7 +20,7 @@ class Role extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'added_at' => 'datetime'
+        'created_at' => 'datetime'
     ];
 
     public function users()
