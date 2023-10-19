@@ -70,6 +70,22 @@ class DatabaseSeeder extends Seeder
             'description' => 'Delete roles'
         ]);
 
+        // Permission
+        DB::table('permission')->insert([
+            'name' => 'permission.read',
+            'description' => 'Read permission data'
+        ]);
+
+        DB::table('permission')->insert([
+            'name' => 'permission.modify',
+            'description' => 'Modify permission data'
+        ]);
+
+        DB::table('permission')->insert([
+            'name' => 'permission.delete',
+            'description' => 'Delete permissions'
+        ]);
+
         // Link roles to permissions
         DB::table('role_to_permission')->insert([
             'role_id' => 1,

@@ -6,5 +6,8 @@
         @if(Auth::user()->checkPermission('role.read'))
             <a href="/roles" wire:navigate>Manage roles</a><br/>
         @endif
+        @if(Auth::user()->checkPermission('permission.read'))
+            <a href="/permissions" wire:navigate>Manage permissions</a><br/>
+        @endif
     </p>
 </div>
