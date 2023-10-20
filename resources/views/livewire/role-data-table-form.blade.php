@@ -2,6 +2,12 @@
     <div>
         <input type="text" wire:model.defer="fields.name"/>
         <input type="text" wire:model.defer="fields.description"/>
+        <div>
+            @foreach ($permissions as $key => $permission)
+                <input wire:model.defer="selected_permissions" wire:key="{{ 'permission-' . $key }}" type="checkbox" id="{{ 'permission-' . $key }}" name="permission" value="{{ $key }}" />
+                <label for="{{ 'permission-' . $key }}">{{ $permission }}</label><br>
+            @endforeach
+        </div>
         <button wire:click="update">Save</button>
         <button wire:click="cancel">Cancel</button>
     </div>

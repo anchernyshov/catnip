@@ -22,4 +22,9 @@ class Permission extends Model
     protected $casts = [
         'created_at' => 'datetime'
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_to_permission', 'permission_id', 'role_id');
+    }
 }
