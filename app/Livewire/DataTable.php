@@ -24,6 +24,7 @@ class DataTable extends Component
         if (Auth::user()->checkPermission($this->delete_permission)) {
             try {
                 $this->model::find($id)->delete();
+                \App\Helpers\EventLogger::add('delete', (new $this->model)->getTable(), $id, null);
             } catch (\Exception $e) {
                 abort(500);
             }
