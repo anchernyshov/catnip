@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('password', 60);
             $table->boolean('active')->default(true);
             $table->unsignedTinyInteger('role_id')->nullable();
-            $table->timestamps();
+            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
             $table->foreign('role_id')->references('id')->on('role')->onUpdate('cascade')->onDelete('set null');
         });
     }
