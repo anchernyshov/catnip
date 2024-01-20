@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -86,37 +87,23 @@ class DatabaseSeeder extends Seeder
             'description' => 'Delete permissions'
         ]);
 
+        // Task
+        DB::table('permission')->insert([
+            'name' => 'task.read',
+            'description' => 'Read task data'
+        ]);
+
+        DB::table('permission')->insert([
+            'name' => 'task.modify',
+            'description' => 'Modify task data'
+        ]);
+
+        DB::table('permission')->insert([
+            'name' => 'task.delete',
+            'description' => 'Delete tasks'
+        ]);
+
         // Link roles to permissions
-        DB::table('role_to_permission')->insert([
-            'role_id' => 1,
-            'permission_id' => 1
-        ]);
-
-        DB::table('role_to_permission')->insert([
-            'role_id' => 1,
-            'permission_id' => 2
-        ]);
-
-        DB::table('role_to_permission')->insert([
-            'role_id' => 1,
-            'permission_id' => 3
-        ]);
-        
-        DB::table('role_to_permission')->insert([
-            'role_id' => 1,
-            'permission_id' => 4
-        ]);
-
-        DB::table('role_to_permission')->insert([
-            'role_id' => 1,
-            'permission_id' => 5
-        ]);
-
-        DB::table('role_to_permission')->insert([
-            'role_id' => 1,
-            'permission_id' => 6
-        ]);
-
         DB::table('role_to_permission')->insert([
             'role_id' => 3,
             'permission_id' => 1
@@ -142,6 +129,31 @@ class DatabaseSeeder extends Seeder
             'display_name' => 'manager',
             'password' => Hash::make('manager'),
             'role_id' => 3
+        ]);
+
+        // Example tasks
+        DB::table('task')->insert([
+            'name' => 'Example task 1',
+            'description' => 'Default task',
+            'responsible_id' => 3, // Default Manager user
+            'creator_id' => 1      // Default Admin user
+        ]);
+
+        DB::table('task')->insert([
+            'name' => 'Example task 2',
+            'description' => 'Task with due date',
+            'due_date' => Carbon::create('2024', '01', '31'),
+            'responsible_id' => 3, // Default Manager user
+            'creator_id' => 1      // Default Admin user
+        ]);
+
+        DB::table('task')->insert([
+            'name' => 'Example task 3',
+            'description' => 'Task with due date and high priority',
+            'due_date' => Carbon::create('2024', '01', '31'),
+            'priority' => 3,
+            'responsible_id' => 3, // Default Manager user
+            'creator_id' => 1      // Default Admin user
         ]);
     }
 }
