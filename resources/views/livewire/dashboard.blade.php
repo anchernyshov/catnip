@@ -9,5 +9,8 @@
         @if(Auth::user()->checkPermission('permission.read'))
             <a href="/permissions" wire:navigate>Manage permissions</a><br/>
         @endif
+        @if(Auth::user()->checkPermission('task.read'))
+            <a href="/tasks" wire:navigate>Manage tasks</a><br/>
+        @endif
     </p>
 </div>

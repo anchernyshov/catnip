@@ -7,6 +7,7 @@ use App\Livewire\LoginForm;
 use App\Livewire\UserDataTable;
 use App\Livewire\RoleDataTable;
 use App\Livewire\PermissionDataTable;
+use App\Livewire\TaskDataTable;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,5 @@ Route::middleware('simple')->group(function() {
     Route::get('/users', UserDataTable::class);
     Route::get('/roles', RoleDataTable::class);
     Route::get('/permissions', PermissionDataTable::class);
+    Route::get('/tasks', TaskDataTable::class);
 });
