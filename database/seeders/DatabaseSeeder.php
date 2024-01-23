@@ -131,6 +131,23 @@ class DatabaseSeeder extends Seeder
             'role_id' => 3
         ]);
 
+        // Default task statuses
+        DB::table('task_status')->insert([
+            'name' => 'new'
+        ]);
+
+        DB::table('task_status')->insert([
+            'name' => 'active'
+        ]);
+
+        DB::table('task_status')->insert([
+            'name' => 'paused'
+        ]);
+
+        DB::table('task_status')->insert([
+            'name' => 'completed'
+        ]);
+
         // Example tasks
         DB::table('task')->insert([
             'name' => 'Example task 1',

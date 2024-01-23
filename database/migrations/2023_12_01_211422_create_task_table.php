@@ -16,13 +16,16 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name', 255);
             $table->string('description', 1024)->nullable(true);
+            $table->unsignedTinyInteger('status_id')->default(1)->nullable(true);
             $table->unsignedInteger('responsible_id')->nullable(true);
             $table->unsignedTinyInteger('priority')->default(1);
             $table->date('due_date')->nullable(true);
             $table->json('attachments')->default(new Expression('(JSON_ARRAY())'));
             $table->unsignedInteger('creator_id')->nullable(true);
+            $table->boolean('closed')->default(false);
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
+            $table->foreign('status_id')->references('id')->on('task_status')->onUpdate('cascade')->onDelete('set null');
             $table->foreign('responsible_id')->references('id')->on('user')->onUpdate('cascade')->onDelete('set null');
             $table->foreign('creator_id')->references('id')->on('user')->onUpdate('cascade')->onDelete('set null');
         });
