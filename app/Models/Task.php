@@ -20,7 +20,8 @@ class Task extends Model
         'priority',
         'due_date',
         'attachments',
-        'creator_id'
+        'creator_id',
+        'status_id'
     ];
 
     /**
@@ -33,6 +34,11 @@ class Task extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
+
+    public function status()
+    {
+        return $this->belongsTo(TaskStatus::class, 'status_id');
+    }
 
     public function creator()
     {
