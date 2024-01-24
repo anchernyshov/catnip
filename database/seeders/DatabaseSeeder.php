@@ -99,6 +99,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('permission')->insert([
+            'name' => 'task.close',
+            'description' => 'Close tasks'
+        ]);
+
+        DB::table('permission')->insert([
             'name' => 'task.delete',
             'description' => 'Delete tasks'
         ]);

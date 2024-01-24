@@ -13,15 +13,18 @@ class TaskDataTableForm extends DataTableForm
     protected $model = \App\Models\Task::class;
 
     public $users = [];
+    public $statuses = [];
     
     public $fields = [
         'name' => null,
         'description' => null,
         'responsible_id' => null,
+        'status_id' => null,
         'priority' => 1,
         'due_date' => null,
         'attachments' => '[]',
-        'creator_id' => null
+        'creator_id' => null,
+        'closed' => 0
     ];
 
     protected $rules = [
@@ -45,6 +48,10 @@ class TaskDataTableForm extends DataTableForm
         $users = \App\Models\User::get();
         foreach ($users as $user) {
             $this->users[$user->id] = $user->display_name;
+        }
+        $statuses = \App\Models\TaskStatus::get();
+        foreach ($statuses as $status) {
+            $this->statuses[$status->id] = $status->name;
         }
     }
 }

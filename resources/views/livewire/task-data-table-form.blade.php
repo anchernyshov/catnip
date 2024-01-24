@@ -2,6 +2,12 @@
     <div>
         <input type="text" wire:model.defer="fields.name"/>
         <input type="text" wire:model.defer="fields.description"/>
+        <select wire:model.defer="fields.status_id">
+            <option value="">No status selected</option>
+            @foreach($statuses as $key => $value)
+                <option value="{{ $key }}">{{ $value }}</option>
+            @endforeach
+        </select>
         <select wire:model.defer="fields.responsible_id">
             <option value="">No user selected</option>
             @foreach($users as $key => $value)
