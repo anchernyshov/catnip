@@ -165,8 +165,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Example task 2',
             'description' => 'Task with due date',
             'due_date' => Carbon::create('2024', '01', '31'),
-            'responsible_id' => 3, // Default Manager user
-            'creator_id' => 1      // Default Admin user
+            'responsible_id' => 3,
+            'creator_id' => 1
         ]);
 
         DB::table('task')->insert([
@@ -174,8 +174,63 @@ class DatabaseSeeder extends Seeder
             'description' => 'Task with due date and high priority',
             'due_date' => Carbon::create('2024', '01', '31'),
             'priority' => 3,
-            'responsible_id' => 3, // Default Manager user
-            'creator_id' => 1      // Default Admin user
+            'responsible_id' => 3,
+            'creator_id' => 1
+        ]);
+
+        DB::table('task')->insert([
+            'name' => 'Example task 4',
+            'description' => 'Closed task',
+            'responsible_id' => 3,
+            'status_id' => 4,
+            'closed' => 1,
+            'creator_id' => 1
+        ]);
+
+        DB::table('task')->insert([
+            'name' => 'Example task 5',
+            'description' => 'Paused task',
+            'status_id' => 3,
+            'responsible_id' => 3,
+            'creator_id' => 1
+        ]);
+
+        DB::table('task')->insert([
+            'name' => 'Example task 6',
+            'description' => 'Task in progress',
+            'status_id' => 2,
+            'responsible_id' => 3,
+            'creator_id' => 1
+        ]);
+
+        DB::table('task')->insert([
+            'name' => 'Example task 7',
+            'description' => 'Default task',
+            'responsible_id' => 3,
+            'creator_id' => 1
+        ]);
+
+        DB::table('task')->insert([
+            'name' => 'Example task 8',
+            'description' => 'Closed task',
+            'responsible_id' => 3,
+            'status_id' => 4,
+            'responsible_id' => 3,
+            'creator_id' => 1
+        ]);
+
+        DB::table('task')->insert([
+            'name' => 'Example task 9',
+            'description' => 'Default task',
+            'responsible_id' => 3,
+            'creator_id' => 1
+        ]);
+
+        DB::table('task')->insert([
+            'name' => 'Example task 10',
+            'description' => 'Default task',
+            'responsible_id' => 3,
+            'creator_id' => 1
         ]);
     }
 }

@@ -58,6 +58,9 @@
                 @endforeach
             </tbody>
         </x-data-table>
+        <div>
+            {{ $items->links('components.layouts.pagination') }} 
+        </div>
         @livewire('task-data-table-form')
     </p>
 </div>
