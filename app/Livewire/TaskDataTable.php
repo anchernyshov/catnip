@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskDataTable extends DataTable
 {
-    const VIEW_PERMISSION = 'task.read';
+    protected const VIEW_PERMISSION = 'task.read';
+    protected const MODIFY_PERMISSION = 'task.modify';
+    protected const DELETE_PERMISSION = 'task.delete';
+    protected const CLOSE_PERMISSION = 'task.close';
     
-    protected $delete_permission = 'task.delete';
-    protected $close_permission = 'task.close';
     protected $view_name = 'livewire.task-data-table';
     protected $model = \App\Models\Task::class;
     
@@ -28,8 +29,12 @@ class TaskDataTable extends DataTable
         $this->setClosed($id, 0);
     }
 
+    public function checkClosePermission() {
+        return $this->checkPermission('CLOSE_PERMISSION');
+    }
+
     private function setClosed($id, $val) {
-        if (Auth::user()->checkPermission($this->close_permission)) {
+        if (Auth::user()->checkPermission(self::CLOSE_PERMISSION)) {
             try {
                 $task = $this->model::find($id);
                 if ($task) {

@@ -1,7 +1,7 @@
 <div>
     <p>
         <div>Permissions:</div>
-        @if (Auth::user()->checkPermission('permission.modify'))
+        @if ($this->checkModifyPermission())
             <button wire:click="$dispatchTo('permission-data-table-form', 'create')">Add</button>
         @endif
         <br/>
@@ -23,10 +23,10 @@
                         <td>{{ $item->description }}</td>
                         <td>{{ $item->added_at }}</td>
                         <td>
-                            @if (Auth::user()->checkPermission('permission.modify'))
+                            @if ($this->checkModifyPermission())
                                 <button wire:click="$dispatchTo('permission-data-table-form', 'modify', { id: {{ $item->id }}})">Edit</button>
                             @endif
-                            @if (Auth::user()->checkPermission('permission.delete'))
+                            @if ($this->checkDeletePermission())
                                 <button wire:click="delete({{ $item->id }})">Delete</button>
                             @endif
                         </td>

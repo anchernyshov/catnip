@@ -16,30 +16,16 @@ class SimpleAuth
      * @return mixed
      */
 
-    public function handle($request, Closure $next)
-    {
-        $permission = null;
-        $controller_class_name = \Route::getRoutes()->match($request)->action['controller'];
-        
-        if (class_exists($controller_class_name)) {
-            $permission = null;
-            if (defined("$controller_class_name::VIEW_PERMISSION")) {
-                $permission = $controller_class_name::VIEW_PERMISSION;
-            }
-        }
-
+    public function handle($request, Closure $next) {
         if ( Auth::check() ) {
-            if ($permission === null) {
-                return $next($request);
-            } else {
-                if (Auth::user()->checkPermission($permission)) {
-                    return $next($request);
-                } else {
+            if (method_exists(\Route::getCurrentRoute()->getActionMethod(), 'checkViewPermission')) {
+                if (\Route::getCurrentRoute()->getController()->checkViewPermission() === false) {
                     abort(403);
                 }
             }
+            return $next($request);
         } else {
             return redirect()->route('login');
-        } 
+        }
     }
 }

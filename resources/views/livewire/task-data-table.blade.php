@@ -1,7 +1,7 @@
 <div>
     <p>
         <div>Tasks:</div>
-        @if (Auth::user()->checkPermission('task.modify'))
+        @if ($this->checkModifyPermission())
             <button wire:click="$dispatchTo('task-data-table-form', 'create')">Add</button>
         @endif
         <br/>
@@ -39,17 +39,17 @@
                         <td>{{ $item->created_at }}</td>
                         <td>
                             @if (!$item->closed)
-                                @if (Auth::user()->checkPermission('task.close'))
+                            @if ($this->checkClosePermission())
                                     <button wire:click="close({{ $item->id }})">Close</button>
                                 @endif
-                                @if (Auth::user()->checkPermission('task.modify'))
+                            @if ($this->checkModifyPermission())
                                     <button wire:click="$dispatchTo('task-data-table-form', 'modify', { id: {{ $item->id }}})">Edit</button>
                                 @endif
-                                @if (Auth::user()->checkPermission('task.delete'))
+                            @if ($this->checkDeletePermission())
                                     <button wire:click="delete({{ $item->id }})">Delete</button>
                                 @endif
                             @else
-                                @if (Auth::user()->checkPermission('task.close'))
+                            @if ($this->checkClosePermission())
                                     <button wire:click="return({{ $item->id }})">Return</button>
                                 @endif
                             @endif
