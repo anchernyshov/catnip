@@ -2,15 +2,8 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-
-use Illuminate\Support\Facades\Auth;
-
-class DataTableForm extends Component
+class DataTableForm extends BaseComponent
 {
-    const VIEW_PERMISSION = '';
-
-    protected $modify_permission = null;
     protected $view_name = '';
     protected $model = null;
  
@@ -31,7 +24,7 @@ class DataTableForm extends Component
     }
     
     public function loadFields($id) {
-        if (Auth::user()->checkPermission($this->modify_permission)) {
+        if ($this->checkModifyPermission()) {
             $this->resetValidation();
             $this->visible = true;
             try {
@@ -50,14 +43,14 @@ class DataTableForm extends Component
     }
 
     public function create() {
-        if (Auth::user()->checkPermission($this->modify_permission)) {
+        if ($this->checkModifyPermission()) {
             $this->visible = true;
             $this->clear();
         }
     }
 
     public function update() {
-        if (Auth::user()->checkPermission($this->modify_permission)) {
+        if ($this->checkModifyPermission()) {
             $this->validate();
             try {
                 $table_name = (new $this->model)->getTable();

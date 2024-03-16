@@ -2,13 +2,8 @@
 
 namespace App\Livewire;
 
-use Illuminate\Support\Facades\Auth;
-
 class RoleDataTableForm extends DataTableForm
 {
-    const VIEW_PERMISSION = 'role.read';
-
-    protected $modify_permission = 'role.modify';
     protected $view_name = 'livewire.role-data-table-form';
     protected $model = \App\Models\Role::class;
 
@@ -33,7 +28,7 @@ class RoleDataTableForm extends DataTableForm
     }
 
     public function loadFields($id) {
-        if (Auth::user()->checkPermission($this->modify_permission)) {
+        if ($this->checkModifyPermission()) {
             $this->clear();
             try {
                 $obj = $this->model::with('permissions')->find($id);
@@ -55,7 +50,7 @@ class RoleDataTableForm extends DataTableForm
     }
 
     public function update() {
-        if (Auth::user()->checkPermission($this->modify_permission)) {
+        if ($this->checkModifyPermission()) {
             $this->validate();
             try {
                 if ($this->selected_id) {

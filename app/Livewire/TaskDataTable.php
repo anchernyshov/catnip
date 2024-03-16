@@ -34,7 +34,7 @@ class TaskDataTable extends DataTable
     }
 
     private function setClosed($id, $val) {
-        if (Auth::user()->checkPermission(self::CLOSE_PERMISSION)) {
+        if ($this->checkClosePermission()) {
             try {
                 $task = $this->model::find($id);
                 if ($task) {
