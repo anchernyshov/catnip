@@ -26,6 +26,7 @@ class DataTableForm extends BaseComponent
     public function loadFields($id) {
         if ($this->checkModifyPermission()) {
             $this->resetValidation();
+            $this->resetFields();
             $this->visible = true;
             try {
                 $obj = $this->model::find($id);
@@ -36,6 +37,7 @@ class DataTableForm extends BaseComponent
                         $this->fields[$key] = $obj->$key;
                     }
                 }
+                $this->afterFieldsLoad($obj);
             } catch(\Exception $e) {
                 abort(500);
             }
@@ -71,7 +73,14 @@ class DataTableForm extends BaseComponent
                         $obj->$key = $this->fields[$key];
                     }
                 }
-                $obj->save();
+                
+                $save_result = $obj->save();
+
+                if ($save_result) {
+                    $this->afterModelSave($obj);
+                } else {
+                    abort(500);
+                }
 
                 if ($this->selected_id) {
                     \App\Helpers\EventLogger::add('update', $table_name, $obj->id, json_encode($event_details));
@@ -87,6 +96,10 @@ class DataTableForm extends BaseComponent
             $this->clear();
         }
     }
+
+    protected function afterModelSave($obj) {}
+
+    protected function afterFieldsLoad($obj) {}
 
     public function cancel() {
         $this->visible = false;

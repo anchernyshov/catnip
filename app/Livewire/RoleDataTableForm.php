@@ -27,57 +27,15 @@ class RoleDataTableForm extends DataTableForm
         }
     }
 
-    public function loadFields($id) {
-        if ($this->checkModifyPermission()) {
-            $this->clear();
-            try {
-                $obj = $this->model::with('permissions')->find($id);
-                $attrs = $obj->getAttributes();
-                $this->selected_id = $id;
-                foreach ($this->fields as $key => $value) {
-                    if (array_key_exists($key, $attrs)) {
-                        $this->fields[$key] = $obj->$key;
-                    }
-                }
-                foreach ($obj->permissions as $permission) {
-                    $this->selected_permissions[] = $permission->id;
-                }
-                $this->visible = true;
-            } catch(\Exception $e) {
-                abort(500);
-            }
+    protected function afterFieldsLoad($obj) {
+        foreach ($obj->permissions as $permission) {
+            $this->selected_permissions[] = $permission->id;
         }
     }
 
-    public function update() {
-        if ($this->checkModifyPermission()) {
-            $this->validate();
-            try {
-                if ($this->selected_id) {
-                    $obj = $this->model::find($this->selected_id);
-                } else {
-                    $obj = new $this->model();
-                }
-                $attrs = \Schema::getColumnListing((new $this->model)->getTable());
-                foreach ($this->fields as $key => $value) {
-                    if (in_array($key, $attrs)) {
-                        $obj->$key = $this->fields[$key];
-                    }
-                }
-                $saved = $obj->save();
-                if ($saved) {
-                    \App\Models\Role::find($obj->id)->permissions()->detach();
-                    \App\Models\Role::find($obj->id)->permissions()->attach($this->selected_permissions);
-                } else {
-                    abort(500);
-                }
-                $this->dispatch('refresh');
-            } catch(\Exception $e) {
-                abort(500);
-            }
-            $this->visible = false;
-            $this->clear();
-        }
+    protected function afterModelSave($obj) {
+        $obj->permissions()->detach();
+        $obj->permissions()->attach($this->selected_permissions);
     }
 
     public function resetFields() {
